@@ -1,12 +1,24 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 app = Flask(__name__)
+
+app.secret_key = 'secret'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 def factors(num):
     return [x for x in range(1, num+1) if num%x==0]
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    y = session.get('y', None)
+    if not y:
+        session['y'] = 1
+        return "Session created."
+    elif y >= 10:
+        session.clear()
+        return "The session is clear"
+    else:
+        session['y'] += 1
+        return "Total Refreshes for user: " + str(session['y'])
 
 @app.route('/about')
 def about():
