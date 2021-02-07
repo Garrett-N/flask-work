@@ -5,8 +5,12 @@ def factors(num):
     return [x for x in range(1, num+1) if num%x==0]
 
 @app.route('/')
-def hello():
+def home():
     return render_template('home.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/Garrett')
 def garrett():
