@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 def factors(num):
@@ -6,7 +6,7 @@ def factors(num):
 
 @app.route('/')
 def hello():
-    return 'Hi there!'
+    return render_template('home.html')
 
 @app.route('/Garrett')
 def garrett():
